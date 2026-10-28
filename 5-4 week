@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title> Kartika Patil| JavaScript Portfolio</title>
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+      --dark: #111827;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --white: #ffffff;
+      --success: #16a34a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+
+    nav {
+      background: var(--dark);
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #c4b5fd;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 20px;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--primary);
+      font-size: 30px;
+    }
+
+    .about {
+      text-align: center;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .skill {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 20px;
+    }
+
+    .project-card {
+      border-left: 5px solid var(--primary);
+    }
+
+    button {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: var(--secondary);
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eef2ff;
+      border-radius: 10px;
+      color: var(--dark);
+      white-space: pre-line;
+    }
+
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      text-align: center;
+      padding: 25px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>ARYAN KAMDI</h1>
+    <p>JavaScript Developer Portfolio</p>
+    <p>PRN: 25070521130</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#javascript">JavaScript Demo</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+
+    <div class="about">
+      <p>
+        Hello! I am Aryan Kamdi, a computer engineering student
+        interested in web development, JavaScript, problem solving,
+        and building practical software projects.
+      </p>
+
+      <p>
+        This portfolio demonstrates modern JavaScript concepts including
+        variables, arrow functions, template literals, destructuring,
+        spread/rest operators, modules, and array/object methods.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>My Skills</h2>
+
+    <div class="skills" id="skillsContainer"></div>
+  </section>
+
+  <section id="projects">
+    <h2>My Projects</h2>
+
+    <div class="cards" id="projectsContainer"></div>
+  </section>
+
+  <section id="javascript">
+    <h2>JavaScript Concepts Demonstration</h2>
+
+    <div class="card">
+      <h3>Concepts Covered</h3>
+
+      <ul>
+        <li>let and const</li>
+        <li>Arrow functions</li>
+        <li>Template literals</li>
+        <li>Destructuring</li>
+        <li>Spread operator</li>
+        <li>Rest parameters</li>
+        <li>ES6 modules</li>
+        <li>map()</li>
+        <li>filter()</li>
+        <li>reduce()</li>
+        <li>find()</li>
+        <li>some()</li>
+        <li>every()</li>
+      </ul>
+
+      <button onclick="runJavaScriptDemo()">
+        Run JavaScript Demo
+      </button>
+
+      <div class="output" id="output">
+        Click the button to display JavaScript results.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Aryan Kamdi</p>
+    <p>PRN: 25070521130</p>
+  </footer>
+
+  <script type="module">
+
+    // --------------------------------------------------
+    // let and const
+    // --------------------------------------------------
+
+    const studentName = "Aryan Kamdi";
+    const prn = "25070521130";
+
+    let studentYear = "Second Year";
+
+    // --------------------------------------------------
+    // Arrow functions
+    // --------------------------------------------------
+
+    const greetStudent = name => `Hello, ${name}!`;
+
+    const calculateTotal = (a, b) => a + b;
+
+    // --------------------------------------------------
+    // Template literals
+    // --------------------------------------------------
+
+    const introduction = `
+      My name is ${studentName}.
+      I am studying in ${studentYear}.
+      My PRN is ${prn}.
+    `;
+
+    // --------------------------------------------------
+    // Arrays and objects
+    // --------------------------------------------------
+
+    const skills = [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "C++",
+      "Python",
+      "React"
+    ];
+
+    const projects = [
+      {
+        title: "ANPR System",
+        description:
+          "Automatic Number Plate Recognition system using image processing.",
+        technology: "Python and Computer Vision"
+      },
+      {
+        title: "CampusConnect",
+        description:
+          "A college event registration and management website.",
+        technology: "HTML, CSS and JavaScript"
+      },
+      {
+        title: "SkillTrack",
+        description:
+          "An expense management application with validation and storage.",
+        technology: "JavaScript and Local Storage"
+      }
+    ];
+
+    // --------------------------------------------------
+    // Destructuring
+    // --------------------------------------------------
+
+    const [firstSkill, secondSkill, ...remainingSkills] = skills;
+
+    const firstProject = projects[0];
+
+    const {
+      title: projectTitle,
+      technology: projectTechnology
+    } = firstProject;
+
+    // --------------------------------------------------
+    // Spread operator
+    // --------------------------------------------------
+
+    const extraSkills = ["Git", "GitHub"];
+
+    const allSkills = [...skills, ...extraSkills];
+
+    // --------------------------------------------------
+    // Rest parameter
+    // --------------------------------------------------
+
+    const addNumbers = (...numbers) => {
+      return numbers.reduce((total, number) => total + number, 0);
+    };
+
+    // --------------------------------------------------
+    // map()
+    // --------------------------------------------------
+
+    const skillNames = skills.map(skill => skill.toUpperCase());
+
+    // --------------------------------------------------
+    // filter()
+    // --------------------------------------------------
+
+    const javascriptRelatedSkills = skills.filter(
+      skill => skill === "JavaScript" || skill === "React"
+    );
+
+    // --------------------------------------------------
+    // reduce()
+    // --------------------------------------------------
+
+    const totalSkillCharacters = skills.reduce(
+      (total, skill) => total + skill.length,
+      0
+    );
+
+    // --------------------------------------------------
+    // find()
+    // --------------------------------------------------
+
+    const foundProject = projects.find(
+      project => project.title === "ANPR System"
+    );
+
+    // --------------------------------------------------
+    // some()
+    // --------------------------------------------------
+
+    const knowsJavaScript = skills.some(
+      skill => skill === "JavaScript"
+    );
+
+    // --------------------------------------------------
+    // every()
+    // --------------------------------------------------
+
+    const allSkillsAreStrings = skills.every(
+      skill => typeof skill === "string"
+    );
+
+    // --------------------------------------------------
+    // Display skills using map()
+    // --------------------------------------------------
+
+    const skillsContainer = document.getElementById("skillsContainer");
+
+    skillsContainer.innerHTML = skills
+      .map(skill => `<span class="skill">${skill}</span>`)
+      .join("");
+
+    // --------------------------------------------------
+    // Display projects using map()
+    // --------------------------------------------------
+
+    const projectsContainer = document.getElementById("projectsContainer");
+
+    projectsContainer.innerHTML = projects
+      .map(
+        project => `
+          <div class="card project-card">
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <p><strong>Technology:</strong> ${project.technology}</p>
+          </div>
+        `
+      )
+      .join("");
+
+    // --------------------------------------------------
+    // JavaScript demonstration function
+    // --------------------------------------------------
+
+    window.runJavaScriptDemo = () => {
+
+      const output = document.getElementById("output");
+
+      const result = `
+${greetStudent(studentName)}
+
+${introduction}
+
+let example:
+Student year = ${studentYear}
+
+const example:
+PRN = ${prn}
+
+Arrow function example:
+10 + 20 = ${calculateTotal(10, 20)}
+
+Template literal example:
+Welcome ${studentName} to the JavaScript portfolio.
+
+Destructuring example:
+First skill = ${firstSkill}
+Second skill = ${secondSkill}
+Remaining skills = ${remainingSkills.join(", ")}
+
+Object destructuring example:
+Project title = ${projectTitle}
+Technology = ${projectTechnology}
+
+Spread operator example:
+All skills = ${allSkills.join(", ")}
+
+Rest parameter example:
+10 + 20 + 30 = ${addNumbers(10, 20, 30)}
+
+map() example:
+${skillNames.join(", ")}
+
+filter() example:
+${javascriptRelatedSkills.join(", ")}
+
+reduce() example:
+Total characters in skill names = ${totalSkillCharacters}
+
+find() example:
+${foundProject.title}
+
+some() example:
+Does the student know JavaScript? ${knowsJavaScript}
+
+every() example:
+Are all skills strings? ${allSkillsAreStrings}
+      `;
+
+      output.textContent = result;
+    };
+
+  </script>
+
+</body>
+</html>
