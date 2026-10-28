@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Accessible and responsive student event registration website demonstrating HTML5 semantics, forms, Flexbox, Grid, and CSS variables." />
+  <title>CampusConnect | Student Event Registration</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #f59e0b;
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #cbd5e1;
+      --radius: 14px;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--background);
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 4rem 0;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .button {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+    }
+
+    .hero-card {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card strong {
+      color: var(--primary);
+      font-size: 2.5rem;
+      display: block;
+    }
+
+    section {
+      padding: 3rem 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-heading h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .event-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .event-card h3 {
+      color: var(--primary);
+    }
+
+    .event-card p {
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .form-section {
+      background: #e2e8f0;
+    }
+
+    .registration-form {
+      max-width: 800px;
+      margin-inline: auto;
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label,
+    legend {
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+      background: white;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    fieldset {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .radio-group label,
+    .checkbox-label {
+      font-weight: 400;
+    }
+
+    .radio-group input,
+    .checkbox-label input {
+      width: auto;
+      margin-right: 0.35rem;
+    }
+
+    .help-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-size: 0.9rem;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 700;
+    }
+
+    .site-footer {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .site-footer a {
+      color: #bfdbfe;
+    }
+
+    @media (max-width: 800px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .event-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-wrapper {
+        flex-direction: column;
+      }
+
+      .nav-list {
+        justify-content: center;
+      }
+
+      .event-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width {
+        grid-column: auto;
+      }
+
+      .registration-form {
+        padding: 1.25rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a class="logo" href="#home" aria-label="CampusConnect home">CampusConnect</a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#register">Register</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div>
+          <p class="tag">Student Hack-O-Week Project</p>
+          <h1>Connect, Learn and Build Together.</h1>
+          <p>
+            CampusConnect is a responsive student event registration website
+            created using HTML5 semantic elements, accessible forms, CSS Flexbox,
+            CSS Grid and CSS variables.
+          </p>
+          <a class="button" href="#register">Register Now</a>
+        </div>
+
+        <aside class="hero-card" aria-label="Event statistics">
+          <strong>500+</strong>
+          Students connected
+          <hr />
+          <strong>12</strong>
+          Workshops this semester
+          <hr />
+          <strong>100%</strong>
+          Student focused
+        </aside>
+      </div>
+    </section>
+
+    <section id="events">
+      <div class="container">
+        <header class="section-heading">
+          <h2>Upcoming Events</h2>
+          <p>Choose an event and register your interest.</p>
+        </header>
+
+        <div class="event-grid">
+          <article class="event-card">
+            <span class="tag">Technology</span>
+            <h3>Web Development Bootcamp</h3>
+            <p>Learn HTML, CSS and responsive web design from the basics.</p>
+            <p><strong>Date:</strong> 20 September 2026</p>
+            <a href="#register" class="button">Join Event</a>
+          </article>
+
+          <article class="event-card">
+            <span class="tag">Innovation</span>
+            <h3>Project Ideathon</h3>
+            <p>Present your ideas and solve real-world problems creatively.</p>
+            <p><strong>Date:</strong> 25 September 2026</p>
+            <a href="#register" class="button">Join Event</a>
+          </article>
+
+          <article class="event-card">
+            <span class="tag">Career</span>
+            <h3>Resume Building Workshop</h3>
+            <p>Improve your resume, communication and interview skills.</p>
+            <p><strong>Date:</strong> 30 September 2026</p>
+            <a href="#register" class="button">Join Event</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" id="register">
+      <div class="container">
+        <header class="section-heading">
+          <h2>Event Registration</h2>
+          <p>Fill out the form below to register.</p>
+        </header>
+
+        <form class="registration-form" id="registrationForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                autocomplete="name"
+                required
+                minlength="3"
+                aria-describedby="nameHelp"
+              />
+              <small class="help-text" id="nameHelp">Enter your full name.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                aria-describedby="emailHelp"
+              />
+              <small class="help-text" id="emailHelp">Use a valid email address.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+                pattern="[0-9]{10}"
+                required
+                aria-describedby="phoneHelp"
+              />
+              <small class="help-text" id="phoneHelp">Enter a 10-digit number.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="event">Select Event *</label>
+              <select id="event" name="event" required>
+                <option value="">Choose an event</option>
+                <option value="Web Development Bootcamp">Web Development Bootcamp</option>
+                <option value="Project Ideathon">Project Ideathon</option>
+                <option value="Resume Building Workshop">Resume Building Workshop</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="message">Why do you want to attend?</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                maxlength="250"
+                placeholder="Write a short response..."
+              ></textarea>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>Preferred participation mode *</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="mode" value="Offline" required /> Offline</label>
+              <label><input type="radio" name="mode" value="Online" /> Online</label>
+            </div>
+          </fieldset>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="consent" name="consent" required />
+            I confirm that the information provided is correct. *
+          </label>
+
+          <br /><br />
+          <button class="button" type="submit">Submit Registration</button>
+
+          <div class="success-message" id="successMessage" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <p>&copy; 2026 CampusConnect. Created for Hack-O-Week.</p>
+      <p>Email: <a href="mailto:campusconnect@example.com">campusconnect@example.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const name = document.getElementById("fullName").value;
+      const selectedEvent = document.getElementById("event").value;
+
+      successMessage.textContent =
+        `Thank you, ${name}! Your registration for ${selectedEvent} has been received.`;
+      successMessage.style.display = "block";
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
